@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/area")
 @Slf4j
-
+@Api(tags = "区域查询字典")
 public class AreaController {
     @Autowired
     AreaService areaService;
