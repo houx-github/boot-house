@@ -172,7 +172,7 @@
         //校验表单项
         validateForm:function () {
             $('#addForm').validate({
-                debug:true,//不提交表单为true
+              //  debug:true,//不提交表单为true
             //    submitHandler:function(form){//表单验证通过后走这
                //     alert('校验成功')
              //   }
@@ -191,15 +191,36 @@
                 rules:{
                    province:'required',
                     address:{required:true,maxlength:10},
+                    city:'required',
+                    area:'required',
+                    rentMode:'required',
+                    rental:{
+                       required:true,
+                        positiveInt:true,
+                        max:100000
+                    }
                 },
                 messages:{
+                    rentMode:'必填项',
+                    city:'必填项',
+                    area:'必填项',
                     province: '省为必填项',
                     address:{
                         required:'必填项',
                         maxlength:'不能超过10个字符'
+                    },
+                    rental:{
+                        required:'必填项',
+                        positiveInt:'必须大于0的整数',
+                        max:'最大10万'
                     }
                 }
             })
+            //自定义校验规则
+            $.validator.addMethod('positiveInt',function (value,element) {
+                let reg=/^\+?[1-9]\d*$/
+                return this.optional(element) || (reg.test(value))
+            },'必须是大于0的正整数')
         }
     }
 </script>
