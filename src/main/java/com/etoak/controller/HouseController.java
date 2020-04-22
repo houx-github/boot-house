@@ -1,8 +1,11 @@
 package com.etoak.controller;
 
 import com.etoak.bean.House;
+import com.etoak.bean.HouseVo;
+import com.etoak.bean.Page;
 import com.etoak.service.HouseService;
 import com.etoak.utils.ValidationUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 @RequestMapping("/house")
 public class HouseController {
     @Value("${upload.dir}")
@@ -95,5 +97,12 @@ public class HouseController {
       houseService.addHouse(house);
       return "redirect:/house/toAdd";
   }
-
+    @GetMapping(value = "/list",produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Page<HouseVo> queryList(@RequestParam(required = false,defaultValue = "1") int pageNum,
+                                   @RequestParam(required = false,defaultValue = "10") int pageSize,
+                                   HouseVo houseVo){
+log.info("pageNum - {},pageSize - {},hoseVo - {}",pageNum,pageSize,houseVo);
+return houseService.queryList(pageNum,pageSize,houseVo);
+    }
 }

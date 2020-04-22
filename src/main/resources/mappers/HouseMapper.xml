@@ -30,4 +30,25 @@
         NOW()
         )
     </insert>
+    <select id="queryList" resultType="HouseVo" parameterType="HouseVo">
+        select t.id,
+t.province,
+t.city,
+t.area,
+t.area_name as areaName,
+t.rent_mode as rentMode,
+t2.`name` as rentModeName,
+t.house_type as houseType,
+t3.`name` as houseTypeName,
+t.orientation,
+t4.`name` as orientationName,
+t.rental,
+t.address,
+t.pic,
+DATE_FORMAT(t.publish_time,"%Y-%m-%d %H:%i:%s") as publishTime
+FROM t_boot_house t
+LEFT JOIN t_springmvc_dict t2 on t.rent_mode=t2.`value` AND t2.group_id='rent_mode'
+LEFT JOIN t_springmvc_dict t3 on t.house_type=t3.`value` AND t3.group_id='house_type'
+LEFT JOIN t_springmvc_dict t4 on t.orientation=t4.`value` AND t4.group_id='orientation'
+    </select>
 </mapper>
