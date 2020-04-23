@@ -97,12 +97,19 @@ public class HouseController {
       houseService.addHouse(house);
       return "redirect:/house/toAdd";
   }
+
     @GetMapping(value = "/list",produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Page<HouseVo> queryList(@RequestParam(required = false,defaultValue = "1") int pageNum,
                                    @RequestParam(required = false,defaultValue = "10") int pageSize,
-                                   HouseVo houseVo){
-log.info("pageNum - {},pageSize - {},hoseVo - {}",pageNum,pageSize,houseVo);
-return houseService.queryList(pageNum,pageSize,houseVo);
+                                   HouseVo houseVo,@RequestParam(value = "rentalArr[]",required = false) String[] rentalList){
+log.info("pageNum - {},pageSize - {},hoseVo - {},rental-{}",pageNum,pageSize,houseVo,rentalList);
+
+return houseService.queryList(pageNum,pageSize,houseVo,rentalList);
+    }
+    //list页面
+    @GetMapping("/toList")
+    public String toList(){
+      return "house/list";
     }
 }

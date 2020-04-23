@@ -4,8 +4,6 @@ import com.etoak.bean.House;
 import com.etoak.bean.HouseVo;
 import com.etoak.bean.Page;
 
-import java.util.List;
-
 public interface HouseService {
     int addHouse(House house);
 
@@ -14,7 +12,8 @@ public interface HouseService {
      * @param pageNum
      * @param pageSize
      * @param houseVo
+     * @param rentalList
      * @return
      */
-    Page<HouseVo> queryList(int pageNum,int pageSize,HouseVo houseVo);
+    Page<HouseVo> queryList(int pageNum, int pageSize, HouseVo houseVo, String[] rentalList);
 }
