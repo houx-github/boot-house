@@ -9,6 +9,8 @@ public class User {
     private String password;
     private String gender;
     private Integer age;
+    private String email;
+    private Integer state;
     private String birthday;
 
 }
