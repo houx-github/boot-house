@@ -50,6 +50,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public int deleteById(int id) {
+        return houseMapper.deleteById(id);
+    }
+
+    @Override
     public Page<HouseVo> queryList(int pageNum, int pageSize, HouseVo houseVo, String[] rentalList) {
         this.handleRental(houseVo,rentalList);
         PageHelper.startPage(pageNum,pageSize);
