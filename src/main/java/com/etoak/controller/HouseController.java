@@ -112,4 +112,11 @@ return houseService.queryList(pageNum,pageSize,houseVo,rentalList);
     public String toList(){
       return "house/list";
     }
+
+    @PutMapping("/update")
+    public String update(House house){
+      log.info("house -{}",house);
+      houseService.updateHouse(house);
+      return "redirect:/house/toList";
+    }
 }
