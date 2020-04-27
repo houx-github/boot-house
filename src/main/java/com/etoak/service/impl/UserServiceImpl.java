@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
         });
         return  addResult;
     }
+
+    @Override
+    public User queryByName(String name) {
+        return userMapper.queryByName(name);
+    }
 }

@@ -1,5 +1,6 @@
 package com.etoak.exception;
 
+import com.etoak.commons.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,5 +21,10 @@ public class GlobalExceptionHandler {
         mv.addObject("error",e.getMessage());
         mv.setViewName("error");
         return mv;
+    }
+    @ExceptionHandler(UserLoginException.class)
+    public CommonResult handleUserLoginException(UserLoginException e){
+        log.error(e.getMessage(),e);
+        return new CommonResult(CommonResult.FAILED_CODE,e.getMessage());
     }
 }

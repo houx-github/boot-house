@@ -8,5 +8,16 @@
         values(#{name},#{password},#{email},#{age},#{gender},NOW());
 
     </insert>
+    <select id="queryByName" parameterType="String" resultType="User">
+        select id,
+        name ,
+        password,
+        age,
+        gender,
+        birthday,
+        state
+        from t_boot_user
+        where name= #{name}
+    </select>
 
 </mapper>
